@@ -1,5 +1,6 @@
 package com.gee.patientservice.service;
 
+import com.gee.patientservice.dto.PatientRequestDto;
 import com.gee.patientservice.mapper.PatientMapper;
 import com.gee.patientservice.model.Patient;
 import com.gee.patientservice.dto.PatientResponseDTO;
@@ -20,5 +21,10 @@ public class PatientService {
     public List<PatientResponseDTO> getPatients() {
         List<Patient> patients = patientRepository.findAll();
         return patients.stream().map(PatientMapper::toDTO).toList();
+    }
+
+    public PatientResponseDTO createPatient(PatientRequestDto patientRequestDto) {
+        Patient newPatient = patientRepository.save(PatientMapper.toModel(patientRequestDto));
+        return PatientMapper.toDTO(newPatient);
     }
 }
