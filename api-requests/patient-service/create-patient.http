@@ -17,7 +17,6 @@ Content-Type:  application/json
 
 {
   "name": "John Doe",
-  "email": "",
   "address": "123 main street",
   "dateOfBirth": "1995-08-11",
   "registeredDate": "2026-07-09"
