@@ -1,6 +1,7 @@
 package com.gee.patientservice.service;
 
 import com.gee.patientservice.dto.PatientRequestDto;
+import com.gee.patientservice.exception.EmailAlreadyExistsException;
 import com.gee.patientservice.mapper.PatientMapper;
 import com.gee.patientservice.model.Patient;
 import com.gee.patientservice.dto.PatientResponseDTO;
@@ -24,6 +25,10 @@ public class PatientService {
     }
 
     public PatientResponseDTO createPatient(PatientRequestDto patientRequestDto) {
+        if(patientRepository.existsByEmail(patientRequestDto.getEmail())) {
+            throw new EmailAlreadyExistsException("A patient with this email already exist: " + patientRequestDto.getEmail());
+        }
+
         Patient newPatient = patientRepository.save(PatientMapper.toModel(patientRequestDto));
         return PatientMapper.toDTO(newPatient);
     }
