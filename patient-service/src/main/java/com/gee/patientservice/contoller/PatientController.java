@@ -4,7 +4,6 @@ import com.gee.patientservice.dto.PatientRequestDto;
 import com.gee.patientservice.dto.PatientResponseDTO;
 import com.gee.patientservice.service.PatientService;
 import com.gee.patientservice.validators.CreatePatientValidationGroup;
-import jakarta.validation.Valid;
 import jakarta.validation.groups.Default;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -16,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/patients") //http://localhost:4000/patients
+@RequestMapping("/patients")
 public class PatientController {
 
     private final PatientService patientService;
@@ -51,4 +50,9 @@ public class PatientController {
         return ResponseEntity.ok().body(patientResponseDTO);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePatient(@PathVariable UUID id) {
+        patientService.deletePatient(id);
+        return ResponseEntity.noContent().build();
+    }
 }
