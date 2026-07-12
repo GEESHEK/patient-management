@@ -1,4 +1,8 @@
 ### GET request to get all patients
 GET http://localhost:4000/patients
 
-###
+### Get a specific patient by ID
+GET http://localhost:4000/patients/123e4567-e89b-12d3-a456-426614174000
+
+### Get a patient that does not exist
+GET http://localhost:4000/patients/123e4567-e89b-12d3-a456-426614174111

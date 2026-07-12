@@ -1,11 +1,11 @@
 package com.gee.patientservice.service;
 
 import com.gee.patientservice.dto.PatientRequestDto;
+import com.gee.patientservice.dto.PatientResponseDTO;
 import com.gee.patientservice.exception.EmailAlreadyExistsException;
 import com.gee.patientservice.exception.PatientNotFoundException;
 import com.gee.patientservice.mapper.PatientMapper;
 import com.gee.patientservice.model.Patient;
-import com.gee.patientservice.dto.PatientResponseDTO;
 import com.gee.patientservice.repository.PatientRepository;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +25,13 @@ public class PatientService {
     public List<PatientResponseDTO> getPatients() {
         List<Patient> patients = patientRepository.findAll();
         return patients.stream().map(PatientMapper::toDTO).toList();
+    }
+
+    public PatientResponseDTO getPatientById(UUID id) {
+        Patient patient = patientRepository.findById(id)
+                .orElseThrow(() -> new PatientNotFoundException("Patient not found with ID: " + id));
+
+        return PatientMapper.toDTO(patient);
     }
 
     public PatientResponseDTO createPatient(PatientRequestDto patientRequestDto) {
