@@ -53,7 +53,7 @@ SELECT '123e4567-e89b-12d3-a456-426614174004',
        '654 Maple St, Shelbyville',
        '1995-02-05',
        '2024-03-01'
-WHERE NOT EXISTS (SELECT 1FROM patient WHERE id = '123e4567-e89b-12d3-a456-426614174004');
+WHERE NOT EXISTS (SELECT 1 FROM patient WHERE id = '123e4567-e89b-12d3-a456-426614174004');
 
 -- Insert well-known UUIDs for specific patients
 INSERT INTO patient (id, name, email, address, date_of_birth, registered_date)
